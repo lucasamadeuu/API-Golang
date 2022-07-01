@@ -14,6 +14,7 @@ func main() {
 
 	router.GET("/books", controllers.EncontrarLivros)
 	router.POST("/books", controllers.CriarLivros)
+	router.GET("/books/:id", controllers.EncontrarLivro)
 
 	router.Run()
 
