@@ -11,7 +11,7 @@ func ConnectDatabase() {
 	database, err := gorm.Open("sqlite3", "teste.db")
 
 	if err != nil {
-		panic("Erro ao conectar no banco de dados!")
+		panic("Erro ao conectar no banco de dados.")
 	}
 
 	database.AutoMigrate(&Livro{})
