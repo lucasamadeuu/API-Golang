@@ -13,7 +13,6 @@ func main() {
 	models.ConnectDatabase()
 
 	router.GET("/books", controllers.EncontrarLivros)
-
 	router.POST("/books", controllers.CriarLivros)
 
 	router.Run()
