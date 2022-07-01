@@ -76,5 +76,20 @@ func AtualizarLivro(c *gin.Context) {
 	models.DB.Model(&livro).Updates(atualizar)
 
 	c.JSON(http.StatusOK, gin.H{"data": livro})
+}
+
+func DeletarLivro(c *gin.Context) {
+
+	var livro models.Livro
+	err := models.DB.Where("id = ?", c.Param("id")).First(&livro).Error
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Livro não encontrado!"})
+		return
+	}
+
+	models.DB.Delete(&livro)
+
+	c.JSON(http.StatusOK, gin.H{"data": true})
 
 }
