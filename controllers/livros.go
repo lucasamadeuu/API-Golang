@@ -26,6 +26,7 @@ func CriarLivros(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"data": err.Error()})
 		return
 	}
+
 	livro := models.Livro{
 		Titulo: input.Titulo,
 		Autor:  input.Autor,
