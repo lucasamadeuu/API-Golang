@@ -27,7 +27,9 @@ func EncontrarLivros(c *gin.Context) {
 func CriarLivros(c *gin.Context) {
 	var input CriarLivrosInput
 
-	if err := c.ShouldBindJSON(&input); err != nil {
+	err := c.ShouldBindJSON(&input)
+
+	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"data": err.Error()})
 		return
 	}
