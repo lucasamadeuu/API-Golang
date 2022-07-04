@@ -29,7 +29,7 @@ func CriarLivros(c *gin.Context) {
 	err := c.ShouldBindJSON(&input)
 
 	if err != nil {
-		c.JSON(http.StatusOK, gin.H{"data": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"data": err.Error()})
 		return
 	}
 
@@ -48,7 +48,7 @@ func EncontrarLivro(c *gin.Context) {
 	err := models.DB.Where("id = ?", c.Param("id")).First(&livro).Error
 
 	if err != nil {
-		c.JSON(http.StatusOK, gin.H{"error": "Livro não encontrado!"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Livro não encontrado!"})
 		return
 	}
 
