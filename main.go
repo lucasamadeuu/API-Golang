@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/lucasamadeuu/bookstore-API/controllers"
+	handlers "github.com/lucasamadeuu/bookstore-API/handlers"
 	"github.com/lucasamadeuu/bookstore-API/models"
 )
 
@@ -12,11 +12,11 @@ func main() {
 
 	models.ConnectDatabase()
 
-	router.GET("/books", controllers.EncontrarLivros)
-	router.POST("/books", controllers.CriarLivros)
-	router.GET("/books/:id", controllers.EncontrarLivro)
-	router.PATCH("/books/:id", controllers.AtualizarLivro)
-	router.DELETE("/books/:id", controllers.DeletarLivro)
+	router.GET("/books", handlers.EncontrarLivros)
+	router.POST("/books", handlers.CriarLivros)
+	router.GET("/books/:id", handlers.EncontrarLivro)
+	router.PATCH("/books/:id", handlers.AtualizarLivro)
+	router.DELETE("/books/:id", handlers.DeletarLivro)
 
 	router.Run()
 

@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -70,11 +71,17 @@ func AtualizarLivro(c *gin.Context) {
 	err = c.ShouldBindJSON(&atualizar)
 
 	if err != nil {
-		c.JSON(http.StatusBadGateway, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	models.DB.Model(&livro).Updates(atualizar)
+	err = models.DB.Model(&livro).Updates(atualizar).Error
+
+	if err != nil {
+		log.Println(err)
+		c.JSON(http.StatusInternalServerError, gin.H{"data": err.Error()})
+		return
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": livro})
 }
