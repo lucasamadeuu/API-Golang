@@ -30,6 +30,7 @@ func CriarLivros(c *gin.Context) {
 	err := c.ShouldBindJSON(&input)
 
 	if err != nil {
+		log.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"data": err.Error()})
 		return
 	}
@@ -49,6 +50,7 @@ func EncontrarLivro(c *gin.Context) {
 	err := models.DB.Where("id = ?", c.Param("id")).First(&livro).Error
 
 	if err != nil {
+		log.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Livro não encontrado!"})
 		return
 	}
@@ -62,6 +64,7 @@ func AtualizarLivro(c *gin.Context) {
 	err := models.DB.Where("id = ?", c.Param("id")).First(&livro).Error
 
 	if err != nil {
+		log.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Livro não encontrado!"})
 		return
 	}
@@ -71,6 +74,7 @@ func AtualizarLivro(c *gin.Context) {
 	err = c.ShouldBindJSON(&atualizar)
 
 	if err != nil {
+		log.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -92,6 +96,7 @@ func DeletarLivro(c *gin.Context) {
 	err := models.DB.Where("id = ?", c.Param("id")).First(&livro).Error
 
 	if err != nil {
+		log.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Livro não encontrado!"})
 		return
 	}
